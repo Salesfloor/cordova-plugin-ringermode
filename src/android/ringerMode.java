@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 import android.content.Context;
 import android.media.AudioManager;
@@ -17,7 +18,7 @@ import android.media.AudioManager;
  */
 
 public class ringerMode extends CordovaPlugin {
-    private int[] validModes = new int[]{ AudioManager.RINGER_MODE_SILENT, AudioManager.RINGER_MODE_VIBRATE, AudioManager.RINGER_MODE_NORMAL };
+    private IntStream validModesStream = Arrays.stream(new int[]{ AudioManager.RINGER_MODE_SILENT, AudioManager.RINGER_MODE_VIBRATE, AudioManager.RINGER_MODE_NORMAL });
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -79,7 +80,7 @@ public class ringerMode extends CordovaPlugin {
         this.setRingerMode(callbackContext, AudioManager.RINGER_MODE_NORMAL, "RINGER_MODE_NORMAL");
     }
 
-    private boolean isValidMode(final int mode) {     
-       return Arrays.IntStream(this.validModes).anyMatch(x -> x == mode);
+    private boolean isValidMode(final int mode) {  
+        return this.validModesStream.anyMatch(x -> x == mode);
     }
 }
