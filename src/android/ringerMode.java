@@ -80,6 +80,6 @@ public class ringerMode extends CordovaPlugin {
     }
 
     private boolean isValidMode(final int mode) {     
-       return Arrays.stream(this.validModes).anyMatch(mode::equals);
+       return Arrays.IntStream(this.validModes).anyMatch(x -> x == mode);
     }
 }
